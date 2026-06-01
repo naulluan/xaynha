@@ -1,0 +1,15 @@
+# Cloudflare Pages routing
+# ----------------------------------------------------------------
+# Với cấu trúc thư mục (dutoan/index.html, 3d/index.html), Cloudflare
+# Pages TỰ ĐỘNG phục vụ /dutoan và /3d. Không cần khai báo gì thêm.
+#
+# Dưới đây chỉ là các alias tiện lợi + chuyển hướng file cũ.
+# Khi thêm path mới, thường KHÔNG cần sửa file này.
+
+# Chuyển hướng đường dẫn file .html cũ sang URL sạch (301 vĩnh viễn)
+/dutoan.html   /dutoan   301
+/3d.html       /3d       301
+
+# Vài alias gõ tắt (tùy chọn — xóa nếu không cần)
+/du-toan       /dutoan   301
+/3D            /3d       301

@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dự toán tự mua tự thuê - Phù Ninh Phú Thọ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 50%, #fff7ed 100%);
+  --surface: #ffffff;
+  --surface-alt: #f9fafb;
+  --ink: #0f172a;
+  --ink-soft: #334155;
+  --muted: #64748b;
+  --primary: #0f766e;
+  --primary-dark: #064e3b;
+  --primary-light: #14b8a6;
+  --accent: #f59e0b;
+  --accent-2: #8b5cf6;
+  --success: #10b981;
+  --warn: #f97316;
+  --danger: #ef4444;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --soft: #ecfdf5;
+  --warn-bg: #fff7ed;
+  --shadow-sm: 0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.06);
+  --shadow-md: 0 4px 6px -1px rgba(15,23,42,.07), 0 10px 25px -5px rgba(15,23,42,.08);
+  --shadow-lg: 0 20px 40px -8px rgba(15,23,42,.12), 0 8px 16px -4px rgba(15,23,42,.08);
+  --shadow-glow: 0 0 0 4px rgba(15,118,110,.12);
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --transition: 200ms cubic-bezier(.4,0,.2,1);
+  --transition-slow: 400ms cubic-bezier(.4,0,.2,1);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, #0f766e 0%, #064e3b 50%, #134e4a 100%);
+  color: white;
+  padding: 40px 40px 56px;
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(20,184,166,.3) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+header::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(245,158,11,.18) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(50px);
+  pointer-events: none;
+}
+header .header-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+header .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.12);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.18);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  margin-bottom: 16px;
+}
+header .badge .dot {
+  width: 8px; height: 8px;
+  background: #34d399;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(52,211,153,.25);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(52,211,153,.25); }
+  50% { box-shadow: 0 0 0 8px rgba(52,211,153,.1); }
+}
+header h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+header p {
+  max-width: 920px;
+  line-height: 1.65;
+  margin: 14px 0 0;
+  color: #d1fae5;
+  font-size: 15px;
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 40px;
+  display: flex;
+  gap: 8px;
+  z-index: 50;
+  flex-wrap: wrap;
+  box-shadow: 0 1px 0 rgba(15,23,42,.04);
+}
+nav button {
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 999px;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-family: inherit;
+  transition: all var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+nav button:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+nav button.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(15,118,110,.3);
+}
+nav button.print-btn {
+  margin-left: auto;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  border-color: #d97706;
+  box-shadow: 0 4px 12px rgba(245,158,11,.25);
+}
+nav button.print-btn:hover {
+  color: white;
+  border-color: #d97706;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(245,158,11,.35);
+}
+
+/* MAIN */
+main {
+  padding: 28px 40px 60px;
+  max-width: 1500px;
+  margin: auto;
+  margin-top: -28px;
+}
+
+/* TOOLBAR */
+.toolbar {
+  display: flex;
+  gap: 14px;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 0 0 22px;
+  background: white;
+  padding: 18px 22px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+}
+.toolbar .field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.toolbar .field label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: .07em;
+}
+.toolbar .field-input {
+  position: relative;
+}
+.toolbar input {
+  width: 170px;
+  padding: 10px 50px 10px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  text-align: right;
+  background: white;
+  color: var(--ink);
+  transition: all var(--transition);
+}
+.toolbar input:hover {
+  border-color: var(--line-strong);
+}
+.toolbar input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-glow);
+}
+.toolbar .field-input .suffix {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* GRID METRICS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.card-metric {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition);
+}
+.card-metric:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+.card-metric::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--accent-color, var(--primary));
+}
+.card-metric.m1 { --accent-color: #3b82f6; }
+.card-metric.m2 { --accent-color: #f59e0b; }
+.card-metric.m3 { --accent-color: #8b5cf6; }
+.card-metric.m4 { --accent-color: var(--primary); }
+.card-metric .metric-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.card-metric .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.card-metric .icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--accent-color, var(--primary));
+  opacity: .12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-metric .icon-inner {
+  font-size: 16px;
+  filter: saturate(2);
+}
+.card-metric .metric {
+  font-size: 24px;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  transition: opacity var(--transition);
+}
+.card-metric .metric.updating {
+  animation: flash .6s ease;
+}
+@keyframes flash {
+  0% { opacity: .4; transform: scale(.98); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* SECTION */
+.section { display: none; }
+.section.active {
+  display: block;
+  animation: fadeIn .35s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 20px;
+}
+.card h2 {
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card h2::before {
+  content: '';
+  width: 4px;
+  height: 22px;
+  background: linear-gradient(180deg, var(--primary), var(--primary-light));
+  border-radius: 4px;
+}
+
+/* NOTE */
+.note {
+  background: linear-gradient(135deg, var(--warn-bg), #fef3c7);
+  border: 1px solid #fed7aa;
+  border-left: 4px solid var(--warn);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin: 14px 0;
+  line-height: 1.6;
+  color: #7c2d12;
+  font-size: 13.5px;
+}
+.note b { color: #9a3412; }
+
+/* TABLE */
+.table-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background: white;
+  font-size: 13px;
+}
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 11px 12px;
+  vertical-align: top;
+  text-align: left;
+}
+thead th {
+  background: linear-gradient(180deg, #f8fafc, #f1f5f9);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--muted);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+tbody tr {
+  transition: background var(--transition);
+}
+tbody tr:hover {
+  background: #f8fafc;
+}
+td.num, th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+.lineTotal {
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+tfoot td {
+  font-weight: 700;
+  background: linear-gradient(180deg, #f9fafb, #f3f4f6);
+  font-size: 13px;
+}
+tfoot tr:last-child td {
+  border-bottom: 0;
+  background: linear-gradient(135deg, var(--soft), #d1fae5);
+  color: var(--primary-dark);
+  font-size: 15px;
+}
+
+/* INPUTS IN TABLE */
+table input[type="number"] {
+  width: 110px;
+  padding: 7px 9px;
+  border: 1.5px solid transparent;
+  background: var(--surface-alt);
+  border-radius: 7px;
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  transition: all var(--transition);
+}
+table input[type="number"]:hover {
+  background: white;
+  border-color: var(--line-strong);
+}
+table input[type="number"]:focus {
+  outline: none;
+  background: white;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-glow);
+}
+table input[type="number"]::placeholder {
+  color: #cbd5e1;
+  font-weight: 400;
+}
+table input.qty {
+  background: #eff6ff;
+  border-color: #dbeafe;
+}
+table input.qty:hover { background: white; border-color: #93c5fd; }
+table input.qty:focus { border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59,130,246,.15); }
+
+table input.ref-price {
+  background: #fef3c7;
+  border-color: #fde68a;
+}
+table input.ref-price:hover { background: white; border-color: #fbbf24; }
+table input.ref-price:focus { border-color: #f59e0b; box-shadow: 0 0 0 4px rgba(245,158,11,.15); }
+
+table input.adj-price {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+table input.adj-price:hover { background: white; border-color: #34d399; }
+table input.adj-price:focus { border-color: var(--primary); box-shadow: var(--shadow-glow); }
+
+table input[type="checkbox"] {
+  width: 20px; height: 20px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* CATEGORY BADGES */
+.cat {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: .02em;
+}
+.cat-tho { background: #fef3c7; color: #92400e; }
+.cat-mai { background: #fee2e2; color: #991b1b; }
+.cat-hoanthien { background: #dbeafe; color: #1e40af; }
+.cat-diennuoc { background: #e0e7ff; color: #3730a3; }
+.cat-ngoaithat { background: #d1fae5; color: #065f46; }
+.cat-phaply { background: #f3e8ff; color: #6b21a8; }
+.cat-phu { background: #f1f5f9; color: #475569; }
+
+/* PILL */
+.pill {
+  display: inline-block;
+  background: var(--soft);
+  color: #065f46;
+  border: 1px solid #bbf7d0;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 4px;
+  margin-top: 4px;
+}
+
+/* HIGHLIGHT ROW UPDATED */
+tbody tr.updated {
+  animation: rowUpdate 1s ease;
+}
+@keyframes rowUpdate {
+  0% { background: #fef3c7; }
+  100% { background: transparent; }
+}
+
+/* CHECKLIST */
+.checklist-table tbody tr {
+  cursor: pointer;
+}
+.checklist-table tbody tr.done td:not(:first-child) {
+  text-decoration: line-through;
+  color: var(--muted);
+  opacity: .7;
+}
+
+/* SUMMARY CARDS */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+.summary-card {
+  background: linear-gradient(135deg, white, #f8fafc);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+.summary-card .summary-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: .07em;
+  margin-bottom: 6px;
+}
+.summary-card .summary-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+}
+.summary-card .summary-percent {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* PROGRESS BAR */
+.progress {
+  margin-top: 18px;
+  background: var(--surface-alt);
+  border-radius: 999px;
+  overflow: hidden;
+  display: flex;
+  height: 14px;
+  border: 1px solid var(--line);
+}
+.progress > div {
+  height: 100%;
+  transition: width var(--transition-slow);
+}
+.progress .seg-mat { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+.progress .seg-cont { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.progress .seg-labor { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.progress-legend {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+.progress-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.progress-legend .dot {
+  width: 10px; height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+/* HELP TIP */
+.help-tip {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 16px;
+  cursor: help;
+  margin-left: 6px;
+  transition: all var(--transition);
+}
+.help-tip:hover { background: var(--primary); color: white; }
+
+/* SCROLL TO TOP */
+.scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(15,118,110,.4);
+  font-size: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--transition);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scroll-top.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.scroll-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(15,118,110,.5);
+}
+
+/* RESET BUTTON */
+.reset-btn {
+  padding: 8px 14px;
+  border: 1.5px solid var(--line);
+  background: white;
+  color: var(--muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all var(--transition);
+  align-self: flex-end;
+  height: 40px;
+}
+.reset-btn:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .summary-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  header { padding: 24px 20px 40px; }
+  header h1 { font-size: 22px; }
+  header p { font-size: 13px; }
+  nav { padding: 10px 16px; }
+  nav button { padding: 7px 12px; font-size: 12px; }
+  nav button.print-btn { margin-left: 0; }
+  main { padding: 20px 16px 40px; }
+  .grid { grid-template-columns: 1fr; }
+  .card { padding: 18px; }
+  .toolbar { padding: 14px; }
+  .toolbar input { width: 100%; }
+  .toolbar .field { width: 100%; }
+}
+
+@media print {
+  nav, .toolbar, .scroll-top, .reset-btn { display: none !important; }
+  body { background: white; }
+  header { background: var(--primary); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .section { display: block !important; page-break-inside: avoid; }
+  .card { box-shadow: none; border: 1px solid #ccc; }
+  table input { border: 0; background: transparent !important; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="badge"><span class="dot"></span>Khái toán xây nhà 2026</div>
+    <h1>Dự toán xây nhà — gia chủ tự mua vật tư, tự thuê thợ</h1>
+    <p>Bảng tính <b>48.000 viên gạch xây tổng cộng</b> cho toàn nhà, gồm tường bao, tường ngăn, gạch móng và hao hụt. Nhân công không tách thô/hoàn thiện, mà để một dòng khoán công tổng theo m². Sơn bả và ốp đá cầu thang cần chốt riêng với thợ.</p>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="show('summary',this)">Tổng quan</button>
+  <button onclick="show('bywork',this)">Theo hạng mục</button>
+  <button onclick="show('materials',this)">Theo vật liệu</button>
+  <button onclick="show('labor',this)">Tiền công</button>
+  <button onclick="show('checklist',this)">Checklist thợ</button>
+  <button class="print-btn" onclick="window.print()">In / PDF</button>
+</nav>
+
+<main>
+  <div class="toolbar">
+    <div class="field">
+      <label for="area">Diện tích tính công</label>
+      <div class="field-input">
+        <input id="area" type="number" value="280" oninput="recalc()">
+        <span class="suffix">m²</span>
+      </div>
+    </div>
+    <div class="field">
+      <label for="laborRate">Đơn giá công</label>
+      <div class="field-input">
+        <input id="laborRate" type="number" value="1200000" oninput="recalc()">
+        <span class="suffix">đ/m²</span>
+      </div>
+    </div>
+    <div class="field">
+      <label for="contRate">Dự phòng vật tư</label>
+      <div class="field-input">
+        <input id="contRate" type="number" value="8.0" step="0.5" oninput="recalc()">
+        <span class="suffix">%</span>
+      </div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()" title="Khôi phục giá trị mặc định">↺ Reset</button>
+    <button class="reset-btn" onclick="exportData()" title="Xuất toàn bộ số liệu ra file JSON để backup hoặc chia sẻ">⬇ Xuất JSON</button>
+    <button class="reset-btn" onclick="document.getElementById('importFile').click()" title="Nhập số liệu từ file JSON đã xuất trước đó">⬆ Nhập JSON</button>
+    <input id="importFile" type="file" accept="application/json,.json" style="display:none" onchange="importData(this)">
+    <span id="saveStatus" style="align-self:flex-end;font-size:12px;color:var(--muted);font-weight:600;height:40px;display:flex;align-items:center;gap:6px"></span>
+  </div>
+
+  <div class="grid">
+    <div class="card-metric m1">
+      <div class="metric-head">
+        <div class="label">Vật tư trước dự phòng</div>
+        <div class="icon"><span class="icon-inner">📦</span></div>
+      </div>
+      <div class="metric" id="matSubtotal"></div>
+    </div>
+    <div class="card-metric m2">
+      <div class="metric-head">
+        <div class="label">Dự phòng vật tư</div>
+        <div class="icon"><span class="icon-inner">🛡️</span></div>
+      </div>
+      <div class="metric" id="contingency"></div>
+    </div>
+    <div class="card-metric m3">
+      <div class="metric-head">
+        <div class="label">Tiền công</div>
+        <div class="icon"><span class="icon-inner">👷</span></div>
+      </div>
+      <div class="metric" id="laborCost"></div>
+    </div>
+    <div class="card-metric m4">
+      <div class="metric-head">
+        <div class="label">Tổng dự toán</div>
+        <div class="icon"><span class="icon-inner">💰</span></div>
+      </div>
+      <div class="metric" id="grandTotal"></div>
+    </div>
+  </div>
+
+  <section id="summary" class="section active">
+    <div class="card">
+      <h2>Kết luận nhanh</h2>
+      <p>Với giả định hiện tại: diện tích tính công <b id="areaText">280 m²</b>, công thợ khoán tổng <b id="laborRateText">1,2 triệu/m²</b>, vật tư mức trung bình khá. Tổng ngân sách tham khảo khoảng <b style="color:var(--primary-dark);font-size:16px" id="grandTotalText"></b>.</p>
+
+      <div class="progress">
+        <div class="seg-mat" id="segMat"></div>
+        <div class="seg-cont" id="segCont"></div>
+        <div class="seg-labor" id="segLabor"></div>
+      </div>
+      <div class="progress-legend">
+        <span><span class="dot" style="background:#3b82f6"></span>Vật tư <span id="legendMat"></span></span>
+        <span><span class="dot" style="background:#f59e0b"></span>Dự phòng <span id="legendCont"></span></span>
+        <span><span class="dot" style="background:#8b5cf6"></span>Tiền công <span id="legendLabor"></span></span>
+      </div>
+
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="summary-label">💵 Đơn giá xây/m²</div>
+          <div class="summary-value" id="perSqm"></div>
+          <div class="summary-percent">Tổng dự toán / diện tích tính công</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">📐 Tỷ lệ vật tư / tổng</div>
+          <div class="summary-value" id="matRatio"></div>
+          <div class="summary-percent">Phần vật tư chiếm trong ngân sách</div>
+        </div>
+      </div>
+
+      <div class="note"><b>⚠️ Quan trọng:</b> bảng này là khái toán để gia chủ đi hỏi giá và đàm phán. Khi làm thực tế, cần chốt lại khối lượng theo bản vẽ kết cấu, đặc biệt móng, mái, số WC, cửa, sân/cổng và phạm vi công thợ 1,2tr/m².</div>
+
+      <div>
+        <span class="pill">🧱 Gạch tổng: 48.000 viên</span>
+        <span class="pill">⚒️ Không tách công thô/hoàn thiện</span>
+        <span class="pill">✏️ Tất cả đơn giá đều sửa được</span>
+        <span class="pill">✅ Checklist chống phát sinh</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="bywork" class="section">
+    <div class="card">
+      <h2>Dự toán theo hạng mục công trình</h2>
+      <div class="table-wrap">
+        <table id="workTable">
+          <thead><tr><th>Hạng mục</th><th class="num">Vật tư tạm tính</th><th>Ghi chú</th></tr></thead>
+          <tbody>
+            <tr><td>Móng, nền, bê tông lót, chống thấm nền</td><td class="num" data-work="150000000"></td><td>Bao gồm một phần xi măng, thép, cát, đá, chống thấm.</td></tr>
+            <tr><td>Khung bê tông, cột, dầm, sàn, tường xây</td><td class="num" data-work="313810000"></td><td>Bao gồm thép kết cấu, gạch 36.000 viên, vữa xây/trát thô.</td></tr>
+            <tr><td>Mái ngói, khung mái, thoát nước mái</td><td class="num" data-work="106000000"></td><td>Ngói, khung kèo, xà gồ, phụ kiện mái.</td></tr>
+            <tr><td>Hoàn thiện kiến trúc</td><td class="num" data-work="344000000"></td><td>Ốp lát, sơn, cửa, trần, lan can, cầu thang.</td></tr>
+            <tr><td>Điện nước, thiết bị vệ sinh</td><td class="num" data-work="100000000"></td><td>Vật tư điện, nước, thiết bị vệ sinh cơ bản.</td></tr>
+            <tr><td>Ngoại thất, pháp lý, vận chuyển, quản lý</td><td class="num" data-work="110000000"></td><td>Sân, cổng, pháp lý, giám sát, vận chuyển.</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>Tổng vật tư trước dự phòng</td><td class="num" id="workSubtotal"></td><td></td></tr>
+            <tr><td>Dự phòng vật tư</td><td class="num" id="workCont"></td><td></td></tr>
+            <tr><td>Tiền công khoán</td><td class="num" id="workLabor"></td><td>Không tách công thô/công hoàn thiện</td></tr>
+            <tr><td>Tổng cộng</td><td class="num" id="workTotal"></td><td></td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="materials" class="section">
+    <div class="card">
+      <h2>Dự toán theo tổng số lượng nguyên vật liệu</h2>
+      <p class="note"><b>💡 Tip:</b> Cả "Đơn giá tham khảo" và "Đơn giá điều chỉnh" đều sửa được. Nếu cột điều chỉnh có giá trị thì ưu tiên dùng, ngược lại dùng giá tham khảo.</p>
+      <div class="table-wrap">
+        <table id="matTable">
+          <thead>
+            <tr>
+              <th>Nhóm</th>
+              <th>Nguyên vật liệu / hạng mục</th>
+              <th class="num">Khối lượng</th>
+              <th>ĐVT</th>
+              <th class="num">Đơn giá tham khảo</th>
+              <th class="num">Đơn giá điều chỉnh</th>
+              <th class="num">Thành tiền</th>
+              <th>Ghi chú</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Xi măng PCB30/PCB40</td><td class="num"><input type="number" class="qty" step="0.01" value="30" oninput="recalc()"></td><td>tấn</td><td class="num"><input type="number" class="ref-price" step="1000" value="1500000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Tổng cho bê tông, xây, trát; giá tham khảo T5/2026.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 6 (Ø6)</td><td class="num"><input type="number" class="qty" step="1" value="160" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="45000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~2,6 kg/cây. Thép đai cột/dầm nhỏ, thép cấu tạo.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 8 (Ø8)</td><td class="num"><input type="number" class="qty" step="1" value="460" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="85000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~4,6 kg/cây. Thép đai, lưới sàn, thép gia cường.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 12 (Ø12)</td><td class="num"><input type="number" class="qty" step="1" value="120" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="170000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~10,4 kg/cây. Thép chủ dầm/sàn, thép móng nhỏ.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 14 (Ø14)</td><td class="num"><input type="number" class="qty" step="1" value="120" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="235000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~14,1 kg/cây. Thép chủ dầm chính, móng băng/cọc.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 16 (Ø16)</td><td class="num"><input type="number" class="qty" step="1" value="90" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="310000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~18,5 kg/cây. Thép chủ cột, dầm chính, đài móng.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 18 (Ø18)</td><td class="num"><input type="number" class="qty" step="1" value="55" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="395000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~23,4 kg/cây. Thép chủ cột lớn, dầm chính chịu lực. Chốt mác (CB300/CB400) và hãng (Hòa Phát, Việt Ý, Việt Nhật).</td></tr>
+            <tr><td><span class="cat cat-mai">Mái</span></td><td>Thép mái / xà gồ / khung kèo</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>tấn</td><td class="num"><input type="number" class="ref-price" step="1000" value="26000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Tùy biện pháp mái và độ dày thép.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Cát bê tông, cát xây trát, cát san</td><td class="num"><input type="number" class="qty" step="0.01" value="95" oninput="recalc()"></td><td>m³</td><td class="num"><input type="number" class="ref-price" step="1000" value="550000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Gộp nhiều loại cát; giá Phú Thọ T5/2026 biến động theo bãi và vận chuyển.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Đá 1x2 / cấp phối</td><td class="num"><input type="number" class="qty" step="0.01" value="60" oninput="recalc()"></td><td>m³</td><td class="num"><input type="number" class="ref-price" step="1000" value="600000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Dùng cho bê tông, lót móng, phụ trợ.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Gạch xây tổng cộng</td><td class="num"><input type="number" class="qty" step="0.01" value="48000" oninput="recalc()"></td><td>viên</td><td class="num"><input type="number" class="ref-price" step="100" value="1350" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="100" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Gồm tường 220, tường 110, gạch móng; đã cộng hao hụt.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Chống thấm, phụ gia, vật tư phụ phần thô</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="ref-price" step="1000" value="25000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>WC, ban công, mái/seno, chân tường, hộp kỹ thuật.</td></tr>
+            <tr><td><span class="cat cat-mai">Mái</span></td><td>Ngói + lito + phụ kiện mái</td><td class="num"><input type="number" class="qty" step="0.01" value="160" oninput="recalc()"></td><td>m²</td><td class="num"><input type="number" class="ref-price" step="1000" value="500000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Mái dốc, diện tích quy đổi lớn hơn sàn chiếu bằng.</td></tr>
+            <tr><td><span class="cat cat-hoanthien">Hoàn thiện</span></td><td>Gạch lát nền</td><td class="num"><input type="number" class="qty" step="0.01" value="280" oninput="recalc()"></td><td>m²</td><td class="num"><input type="number" class="ref-price" step="1000" value="250000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Mức trung bình; chưa chọn gạch cao cấp.</td></tr>
+            <tr><td><span class="cat cat-hoanthien">Hoàn thiện</span></td><td>Gạch ốp WC / bếp</td><td class="num"><input type="number" class="qty" step="0.01" value="80" oninput="recalc()"></td><td>m²</td><td class="num"><input type="number" class="ref-price" step="1000" value="300000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Tính 2 WC + khu bếp; cần chốt diện tích ốp cao bao nhiêu.</td></tr>
+            <tr><td><span class="cat cat-hoanthien">Hoàn thiện</span></td><td>Keo lát, vữa chà ron, vật tư phụ ốp lát</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="ref-price" step="1000" value="12000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Dễ thiếu nếu chỉ tính tiền gạch.</td></tr>
+            <tr><td><span class="cat cat-hoanthien">Hoàn thiện</span></td><td>Sơn bả vật tư trong/ngoài</td><td class="num"><input type="number" class="qty" step="0.01" value="700" oninput="recalc()"></td><td>m²</td><td class="num"><input type="number" class="ref-price" step="1000" value="90000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Sơn, bột bả, lót, chống kiềm; công sơn nên chốt nằm trong 1,2tr hay không.</td></tr>
+            <tr><td><span class="cat cat-hoanthien">Hoàn thiện</span></td><td>Cửa chính, cửa phòng, cửa WC, cửa sổ</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="ref-price" step="1000" value="100000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Rất nhạy theo vật liệu: gỗ, thép vân gỗ, nhôm kính.</td></tr>
+            <tr><td><span class="cat cat-diennuoc">Điện nước</span></td><td>Vật tư điện</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="ref-price" step="1000" value="55000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Dây, ống luồn, tủ điện, CB, ổ cắm, công tắc, đèn cơ bản.</td></tr>
+            <tr><td><span class="cat cat-diennuoc">Điện nước</span></td><td>Vật tư nước + thiết bị vệ sinh</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="ref-price" step="1000" value="45000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Ống cấp/thoát, bồn cầu, lavabo, sen vòi, phụ kiện.</td></tr>
+            <tr><td><span class="cat cat-hoanthien">Hoàn thiện</span></td><td>Lan can, tay vịn, cầu thang hoàn thiện</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="ref-price" step="1000" value="35000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Kính/inox/sắt/gỗ khác nhau rất lớn.</td></tr>
+            <tr><td><span class="cat cat-ngoaithat">Ngoại thất</span></td><td>Sân, sảnh, cổng, hàng rào, thoát nước ngoài nhà</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="ref-price" step="1000" value="40000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Tạm tính mức tối thiểu; sân rộng sẽ tăng.</td></tr>
+            <tr><td><span class="cat cat-phaply">Pháp lý/QL</span></td><td>Pháp lý, thiết kế, đo đạc, giám sát tối thiểu</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="ref-price" step="1000" value="35000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Không nên bỏ giám sát các mốc: móng, thép sàn, chống thấm.</td></tr>
+            <tr><td><span class="cat cat-phu">Phụ</span></td><td>Vận chuyển, bốc xếp, hao hụt lặt vặt</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="ref-price" step="1000" value="30000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Tự mua vật tư thường phát sinh khoản này.</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td colspan="6">Tổng vật tư trước dự phòng</td><td class="num" id="matTableSubtotal"></td><td></td></tr>
+            <tr><td colspan="6">Dự phòng vật tư</td><td class="num" id="matTableCont"></td><td></td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="labor" class="section">
+    <div class="card">
+      <h2>Tiền công</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Khoản công</th><th class="num">Cách tính</th><th class="num">Thành tiền</th><th>Điểm phải chốt</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Công thợ khoán tổng</td>
+              <td class="num"><span id="laborFormula"></span></td>
+              <td class="num lineTotal" id="laborOnly"></td>
+              <td>Phải ghi rõ có bao gồm xây, trát, ốp lát, sơn, lợp mái, điện nước, chống thấm không.</td>
+            </tr>
+            <tr style="background:#fff7ed">
+              <td><b>🎨 Sơn bả</b><br><span style="color:var(--muted);font-size:12px">Cần chốt riêng</span></td>
+              <td class="num" style="color:var(--muted)">Theo m² hoặc trọn gói</td>
+              <td class="num" style="color:var(--warn);font-weight:700">Chưa tính</td>
+              <td>Tham khảo: <b>25.000–35.000đ/m²</b> (chỉ công, không vật tư). Hỏi rõ: bả mấy lớp, sơn mấy lớp lót/phủ, có bao gồm xử lý nứt chân chim không. Diện tích sơn ~700 m² → ước <b>18–25tr</b>.</td>
+            </tr>
+            <tr style="background:#fff7ed">
+              <td><b>🪨 Ốp đá cầu thang</b><br><span style="color:var(--muted);font-size:12px">Cần chốt riêng</span></td>
+              <td class="num" style="color:var(--muted)">Theo md bậc hoặc m²</td>
+              <td class="num" style="color:var(--warn);font-weight:700">Chưa tính</td>
+              <td>Tham khảo: <b>250.000–400.000đ/md bậc</b> (công ốp, chưa gồm đá). Đá Granite/Marble vật tư riêng ~<b>800k–1,5tr/m²</b>. Hỏi rõ: số bậc, có ốp cổ bậc/mặt bậc không, có ốp chiếu nghỉ và bo nẹp không.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><b>⚠️ Không nên chỉ hỏi "1,2tr/m² bao gồm xây và hoàn thiện".</b> Cần bắt đội thợ ghi thành checklist phạm vi công việc. Nếu họ không nhận <b>sơn bả</b>, <b>ốp đá cầu thang</b>, mái, điện nước, chống thấm hoặc lắp thiết bị thì các khoản đó sẽ phát sinh thêm — đây là 2 mục thường bị bỏ sót nhất.</div>
+    </div>
+  </section>
+
+  <section id="checklist" class="section">
+    <div class="card">
+      <h2>Checklist chống phát sinh khi trao đổi với đội thợ</h2>
+      <p style="color:var(--muted);margin-top:0">Tích vào ô để đánh dấu mục đã chốt xong với thợ. Tiến độ: <b id="checklistProgress" style="color:var(--primary)">0 / 12</b></p>
+      <div class="table-wrap">
+        <table class="checklist-table">
+          <thead><tr><th style="width:60px">Xong?</th><th>Nội dung cần chốt</th></tr></thead>
+          <tbody>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt rõ công thợ 1,2tr/m² gồm những việc nào: đào móng, ghép cốp pha, buộc thép, đổ bê tông, xây, trát, lát, ốp, sơn, chống thấm, lợp mái, lắp thiết bị điện nước.</td></tr>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt công thợ có bao gồm máy móc, giàn giáo, cốp pha, máy trộn, máy cắt, vận chuyển nội bộ hay chủ nhà thuê riêng.</td></tr>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt đội thợ có làm mái ngói/khung kèo không hay phải thuê đội mái riêng.</td></tr>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt sơn bả có nằm trong công 1,2tr/m² không; nếu không, phải tách tiền công sơn.</td></tr>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt lắp điện nước: chỉ đi ống âm hay gồm kéo dây, lắp đèn, ổ cắm, thiết bị vệ sinh.</td></tr>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt chống thấm: WC, ban công, mái/seno, hộp kỹ thuật, chân tường; bảo hành mấy năm.</td></tr>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt tường 220/110: loại gạch, độ dày, mác vữa, trát trong/ngoài, cán nền.</td></tr>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt thanh toán theo giai đoạn: móng, xong sàn tầng 1, xong sàn tầng 2, xong mái, xong trát, bàn giao.</td></tr>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt phát sinh: việc nào tính thêm, đơn giá tính thêm theo m²/md/công nhật.</td></tr>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt hao hụt vật tư: gạch, ngói, thép, cát đá ai chịu nếu mua thừa/thiếu.</td></tr>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt nghiệm thu thép trước khi đổ bê tông, nghiệm thu chống thấm trước khi lát.</td></tr>
+            <tr><td><input type="checkbox" onchange="updateChecklist()"></td><td>Chốt vệ sinh công trường, bảo quản vật tư, mất mát vật tư do ai chịu.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Lên đầu trang">↑</button>
+
+<script>
+const DEFAULTS = {
+  area: 280,
+  laborRate: 1200000,
+  contRate: 8.0,
+  qty: [30, 160, 460, 120, 120, 90, 55, 1, 95, 60, 48000, 1, 160, 280, 80, 1, 700, 1, 1, 1, 1, 1, 1, 1],
+  ref: [1500000, 45000, 85000, 170000, 235000, 310000, 395000, 26000000, 550000, 600000, 1350, 25000000, 500000, 250000, 300000, 12000000, 90000, 100000000, 55000000, 45000000, 35000000, 40000000, 35000000, 30000000]
+};
+
+function fmt(v) { return Math.round(v).toLocaleString('vi-VN') + ' đ'; }
+function fmtPercent(v) { return (v * 100).toFixed(1) + '%'; }
+
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+let lastTotals = {};
+function flashMetric(id, newVal) {
+  const el = document.getElementById(id);
+  if (lastTotals[id] !== undefined && lastTotals[id] !== newVal) {
+    el.classList.remove('updating');
+    void el.offsetWidth;
+    el.classList.add('updating');
+  }
+  lastTotals[id] = newVal;
+}
+
+function recalc() {
+  let mat = 0;
+  document.querySelectorAll('#matTable tbody tr').forEach(tr => {
+    const qty = parseFloat(tr.children[2].querySelector('input').value) || 0;
+    const ref = parseFloat(tr.children[4].querySelector('input').value) || 0;
+    const adj = parseFloat(tr.children[5].querySelector('input').value) || 0;
+    const price = adj > 0 ? adj : ref;
+    const total = qty * price;
+    tr.querySelector('.lineTotal').textContent = fmt(total);
+    mat += total;
+  });
+
+  const contRate = (parseFloat(document.getElementById('contRate').value) || 0) / 100;
+  const cont = mat * contRate;
+  const area = parseFloat(document.getElementById('area').value) || 0;
+  const laborRate = parseFloat(document.getElementById('laborRate').value) || 0;
+  const labor = area * laborRate;
+  const grand = mat + cont + labor;
+
+  document.getElementById('matSubtotal').textContent = fmt(mat);
+  document.getElementById('contingency').textContent = fmt(cont);
+  document.getElementById('laborCost').textContent = fmt(labor);
+  document.getElementById('grandTotal').textContent = fmt(grand);
+
+  flashMetric('matSubtotal', mat);
+  flashMetric('contingency', cont);
+  flashMetric('laborCost', labor);
+  flashMetric('grandTotal', grand);
+
+  document.getElementById('grandTotalText').textContent = fmt(grand);
+  document.getElementById('areaText').textContent = area.toLocaleString('vi-VN') + ' m²';
+  document.getElementById('laborRateText').textContent = (laborRate / 1000000).toFixed(2).replace('.', ',') + ' triệu/m²';
+
+  document.getElementById('matTableSubtotal').textContent = fmt(mat);
+  document.getElementById('matTableCont').textContent = fmt(cont);
+  document.getElementById('workSubtotal').textContent = fmt(mat);
+  document.getElementById('workCont').textContent = fmt(cont);
+  document.getElementById('workLabor').textContent = fmt(labor);
+  document.getElementById('workTotal').textContent = fmt(grand);
+  document.getElementById('laborOnly').textContent = fmt(labor);
+  document.getElementById('laborFormula').textContent = area.toLocaleString('vi-VN') + ' m² × ' + fmt(laborRate) + '/m²';
+  document.querySelectorAll('[data-work]').forEach(td => td.textContent = fmt(parseFloat(td.dataset.work) || 0));
+
+  document.getElementById('perSqm').textContent = area > 0 ? fmt(grand / area) + '/m²' : '—';
+  document.getElementById('matRatio').textContent = grand > 0 ? fmtPercent(mat / grand) : '—';
+
+  if (grand > 0) {
+    const pMat = (mat / grand) * 100;
+    const pCont = (cont / grand) * 100;
+    const pLabor = (labor / grand) * 100;
+    document.getElementById('segMat').style.width = pMat + '%';
+    document.getElementById('segCont').style.width = pCont + '%';
+    document.getElementById('segLabor').style.width = pLabor + '%';
+    document.getElementById('legendMat').textContent = '(' + pMat.toFixed(1) + '%)';
+    document.getElementById('legendCont').textContent = '(' + pCont.toFixed(1) + '%)';
+    document.getElementById('legendLabor').textContent = '(' + pLabor.toFixed(1) + '%)';
+  }
+}
+
+function resetAll() {
+  if (!confirm('Khôi phục toàn bộ giá trị về mặc định?')) return;
+  document.getElementById('area').value = DEFAULTS.area;
+  document.getElementById('laborRate').value = DEFAULTS.laborRate;
+  document.getElementById('contRate').value = DEFAULTS.contRate;
+  document.querySelectorAll('#matTable tbody tr').forEach((tr, i) => {
+    tr.children[2].querySelector('input').value = DEFAULTS.qty[i];
+    tr.children[4].querySelector('input').value = DEFAULTS.ref[i];
+    tr.children[5].querySelector('input').value = '';
+  });
+  recalc();
+}
+
+function updateChecklist() {
+  const boxes = document.querySelectorAll('.checklist-table input[type="checkbox"]');
+  let done = 0;
+  boxes.forEach(b => {
+    const row = b.closest('tr');
+    if (b.checked) { row.classList.add('done'); done++; }
+    else row.classList.remove('done');
+  });
+  document.getElementById('checklistProgress').textContent = done + ' / ' + boxes.length;
+}
+
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTop');
+  if (window.scrollY > 400) btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+
+/* ===== LƯU / KHÔI PHỤC CACHE TRÌNH DUYỆT ===== */
+const STORAGE_KEY = 'house:dutoan:v1';
+
+function collectState() {
+  return {
+    area: document.getElementById('area').value,
+    laborRate: document.getElementById('laborRate').value,
+    contRate: document.getElementById('contRate').value,
+    qty: [...document.querySelectorAll('#matTable tbody tr')].map(tr => tr.children[2].querySelector('input').value),
+    ref: [...document.querySelectorAll('#matTable tbody tr')].map(tr => tr.children[4].querySelector('input').value),
+    adj: [...document.querySelectorAll('#matTable tbody tr')].map(tr => tr.children[5].querySelector('input').value),
+    checklist: [...document.querySelectorAll('.checklist-table input[type="checkbox"]')].map(b => b.checked),
+    savedAt: new Date().toISOString()
+  };
+}
+
+function applyState(s) {
+  if (!s) return;
+  if (s.area !== undefined) document.getElementById('area').value = s.area;
+  if (s.laborRate !== undefined) document.getElementById('laborRate').value = s.laborRate;
+  if (s.contRate !== undefined) document.getElementById('contRate').value = s.contRate;
+  const rows = document.querySelectorAll('#matTable tbody tr');
+  rows.forEach((tr, i) => {
+    if (s.qty && s.qty[i] !== undefined) tr.children[2].querySelector('input').value = s.qty[i];
+    if (s.ref && s.ref[i] !== undefined) tr.children[4].querySelector('input').value = s.ref[i];
+    if (s.adj && s.adj[i] !== undefined) tr.children[5].querySelector('input').value = s.adj[i];
+  });
+  const boxes = document.querySelectorAll('.checklist-table input[type="checkbox"]');
+  boxes.forEach((b, i) => { if (s.checklist && s.checklist[i] !== undefined) b.checked = s.checklist[i]; });
+}
+
+let saveTimer = null;
+function showSaved() {
+  const el = document.getElementById('saveStatus');
+  if (el) el.innerHTML = '<span style="color:var(--success)">●</span> Đã lưu vào trình duyệt';
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(collectState()));
+    showSaved();
+  } catch (e) { /* localStorage có thể bị tắt */ }
+}
+
+function scheduleSave() {
+  const el = document.getElementById('saveStatus');
+  if (el) el.innerHTML = '<span style="color:var(--warn)">●</span> Đang lưu…';
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveState, 500);
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) { applyState(JSON.parse(raw)); return true; }
+  } catch (e) {}
+  return false;
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(collectState(), null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = 'du-toan-' + stamp + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      applyState(JSON.parse(reader.result));
+      recalc();
+      updateChecklist();
+      saveState();
+      alert('Đã nhập số liệu thành công.');
+    } catch (e) {
+      alert('File không hợp lệ: ' + e.message);
+    }
+    input.value = '';
+  };
+  reader.readAsText(file);
+}
+
+/* Tự động lưu mỗi khi có thay đổi input ở bất kỳ đâu */
+document.addEventListener('input', scheduleSave);
+document.addEventListener('change', scheduleSave);
+
+/* Reset cũng xóa cache đã lưu */
+const _resetAll = resetAll;
+resetAll = function () {
+  if (!confirm('Khôi phục toàn bộ giá trị về mặc định?')) return;
+  document.getElementById('area').value = DEFAULTS.area;
+  document.getElementById('laborRate').value = DEFAULTS.laborRate;
+  document.getElementById('contRate').value = DEFAULTS.contRate;
+  document.querySelectorAll('#matTable tbody tr').forEach((tr, i) => {
+    tr.children[2].querySelector('input').value = DEFAULTS.qty[i];
+    tr.children[4].querySelector('input').value = DEFAULTS.ref[i];
+    tr.children[5].querySelector('input').value = '';
+  });
+  document.querySelectorAll('.checklist-table input[type="checkbox"]').forEach(b => b.checked = false);
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  recalc();
+  updateChecklist();
+  const el = document.getElementById('saveStatus');
+  if (el) el.textContent = '';
+};
+
+/* Khôi phục dữ liệu đã lưu (nếu có) rồi tính lại */
+loadState();
+recalc();
+updateChecklist();
+</script>
+</body>
+</html>

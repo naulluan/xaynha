@@ -890,6 +890,7 @@ mark.mat-hl {
       </div>
     </div>
     <button class="reset-btn" onclick="resetAll()" title="Khôi phục giá trị mặc định">↺ Reset</button>
+    <button class="reset-btn" onclick="exportExcel()" title="Xuất bảng dự toán ra file Excel (.xls)">📊 Xuất Excel</button>
     <button class="reset-btn" onclick="exportData()" title="Xuất toàn bộ số liệu ra file JSON để backup hoặc chia sẻ">⬇ Xuất JSON</button>
     <button class="reset-btn" onclick="document.getElementById('importFile').click()" title="Nhập số liệu từ file JSON đã xuất trước đó">⬆ Nhập JSON</button>
     <input id="importFile" type="file" accept="application/json,.json" style="display:none" onchange="importData(this)">
@@ -1017,16 +1018,17 @@ mark.mat-hl {
             </tr>
           </thead>
           <tbody>
-            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Xi măng PCB30/PCB40</td><td class="num"><input type="number" class="qty" step="0.01" value="30" oninput="recalc()"></td><td>tấn</td><td class="num"><input type="number" class="ref-price" step="1000" value="1500000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Tổng cho bê tông, xây, trát; giá tham khảo T5/2026.</td></tr>
-            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 6 (Ø6)</td><td class="num"><input type="number" class="qty" step="1" value="160" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="45000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~2,6 kg/cây. Thép đai cột/dầm nhỏ, thép cấu tạo.</td></tr>
-            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 8 (Ø8)</td><td class="num"><input type="number" class="qty" step="1" value="460" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="85000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~4,6 kg/cây. Thép đai, lưới sàn, thép gia cường.</td></tr>
-            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 12 (Ø12)</td><td class="num"><input type="number" class="qty" step="1" value="120" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="170000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~10,4 kg/cây. Thép chủ dầm/sàn, thép móng nhỏ.</td></tr>
-            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 14 (Ø14)</td><td class="num"><input type="number" class="qty" step="1" value="120" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="235000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~14,1 kg/cây. Thép chủ dầm chính, móng băng/cọc.</td></tr>
-            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 16 (Ø16)</td><td class="num"><input type="number" class="qty" step="1" value="90" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="310000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~18,5 kg/cây. Thép chủ cột, dầm chính, đài móng.</td></tr>
-            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 18 (Ø18)</td><td class="num"><input type="number" class="qty" step="1" value="55" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="395000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~23,4 kg/cây. Thép chủ cột lớn, dầm chính chịu lực. Chốt mác (CB300/CB400) và hãng (Hòa Phát, Việt Ý, Việt Nhật).</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Xi măng PCB30/PCB40</td><td class="num"><input type="number" class="qty" step="0.01" value="35" oninput="recalc()"></td><td>tấn</td><td class="num"><input type="number" class="ref-price" step="1000" value="1500000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Tổng cho bê tông, xây, trát; giá tham khảo T5/2026.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 6 (Ø6)</td><td class="num"><input type="number" class="qty" step="1" value="750" oninput="recalc()"></td><td>kg</td><td class="num"><input type="number" class="ref-price" step="100" value="14500" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="100" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Hòa Phát CB300, tính theo kg. Giá T6/2026 ~13.300đ/kg tại nhà máy, +VAT/vận chuyển ~14.500đ/kg. Thép đai cột/dầm nhỏ, cấu tạo.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 8 (Ø8) — thép có gai</td><td class="num"><input type="number" class="qty" step="1" value="1550" oninput="recalc()"></td><td>kg</td><td class="num"><input type="number" class="ref-price" step="100" value="14500" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="100" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Hòa Phát CB300, thép vằn (có gân), tính theo kg. Giá T6/2026 ~13.300đ/kg tại nhà máy, +VAT/vận chuyển ~14.500đ/kg. Thép đai, lưới sàn, gia cường.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 12 (Ø12)</td><td class="num"><input type="number" class="qty" step="1" value="30" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="170000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~10,4 kg/cây. Thép chủ dầm/sàn, thép móng nhỏ.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 14 (Ø14)</td><td class="num"><input type="number" class="qty" step="1" value="4" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="235000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~14,1 kg/cây. Thép chủ dầm chính, móng băng/cọc.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 16 (Ø16)</td><td class="num"><input type="number" class="qty" step="1" value="150" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="310000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~18,5 kg/cây. Thép chủ cột, dầm chính, đài móng.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Sắt phi 18 (Ø18)</td><td class="num"><input type="number" class="qty" step="1" value="5" oninput="recalc()"></td><td>cây</td><td class="num"><input type="number" class="ref-price" step="500" value="395000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="500" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Cây 11,7m, ~23,4 kg/cây. Thép chủ cột lớn, dầm chính chịu lực. Chốt mác (CB300/CB400) và hãng (Hòa Phát, Việt Ý, Việt Nhật).</td></tr>
             <tr><td><span class="cat cat-mai">Mái</span></td><td>Thép mái / xà gồ / khung kèo</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>tấn</td><td class="num"><input type="number" class="ref-price" step="1000" value="26000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Tùy biện pháp mái và độ dày thép.</td></tr>
-            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Cát bê tông, cát xây trát, cát san</td><td class="num"><input type="number" class="qty" step="0.01" value="95" oninput="recalc()"></td><td>m³</td><td class="num"><input type="number" class="ref-price" step="1000" value="550000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Gộp nhiều loại cát; giá Phú Thọ T5/2026 biến động theo bãi và vận chuyển.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Cát bê tông, cát xây trát, cát san</td><td class="num"><input type="number" class="qty" step="0.01" value="100" oninput="recalc()"></td><td>m³</td><td class="num"><input type="number" class="ref-price" step="1000" value="550000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Gộp nhiều loại cát; giá Phú Thọ T5/2026 biến động theo bãi và vận chuyển.</td></tr>
             <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Đá 1x2 / cấp phối</td><td class="num"><input type="number" class="qty" step="0.01" value="60" oninput="recalc()"></td><td>m³</td><td class="num"><input type="number" class="ref-price" step="1000" value="600000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Dùng cho bê tông, lót móng, phụ trợ.</td></tr>
+            <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Bê tông thương phẩm mác 250</td><td class="num"><input type="number" class="qty" step="0.01" value="50" oninput="recalc()"></td><td>m³</td><td class="num"><input type="number" class="ref-price" step="1000" value="1200000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Bê tông trộn sẵn (đổ bơm), mác 250 (B20). Giá ~1,15–1,25tr/m³ tại trạm miền Bắc T6/2026; nếu dùng phần này thì giảm bớt xi măng/cát/đá trộn tay.</td></tr>
             <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Gạch xây tổng cộng</td><td class="num"><input type="number" class="qty" step="0.01" value="48000" oninput="recalc()"></td><td>viên</td><td class="num"><input type="number" class="ref-price" step="100" value="1350" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="100" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Gồm tường 220, tường 110, gạch móng; đã cộng hao hụt.</td></tr>
             <tr><td><span class="cat cat-tho">Vật tư thô</span></td><td>Chống thấm, phụ gia, vật tư phụ phần thô</td><td class="num"><input type="number" class="qty" step="0.01" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="ref-price" step="1000" value="25000000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>WC, ban công, mái/seno, chân tường, hộp kỹ thuật.</td></tr>
             <tr><td><span class="cat cat-mai">Mái</span></td><td>Ngói + lito + phụ kiện mái</td><td class="num"><input type="number" class="qty" step="0.01" value="160" oninput="recalc()"></td><td>m²</td><td class="num"><input type="number" class="ref-price" step="1000" value="500000" oninput="recalc()"></td><td class="num"><input type="number" class="adj-price" step="1000" placeholder="Tự điền" oninput="recalc()"></td><td class="num lineTotal"></td><td>Mái dốc, diện tích quy đổi lớn hơn sàn chiếu bằng.</td></tr>
@@ -1054,32 +1056,45 @@ mark.mat-hl {
   <section id="labor" class="section">
     <div class="card">
       <h2>Tiền công</h2>
+      <p class="note"><b>💡 Cách dùng:</b> Dòng <b>khoán tổng</b> lấy từ thanh công cụ (diện tích × đơn giá công). Các dòng công bên dưới là <b>công đặc thù thường nằm NGOÀI khoán</b> — sửa khối lượng/đơn giá, hệ thống tự cộng vào tổng. Nếu đội thợ đã nhận việc nào trong giá khoán, đặt khối lượng dòng đó = 0 để khỏi tính trùng.</p>
       <div class="table-wrap">
-        <table>
-          <thead><tr><th>Khoản công</th><th class="num">Cách tính</th><th class="num">Thành tiền</th><th>Điểm phải chốt</th></tr></thead>
-          <tbody>
+        <table id="laborTable">
+          <thead>
             <tr>
-              <td>Công thợ khoán tổng</td>
-              <td class="num"><span id="laborFormula"></span></td>
+              <th>Khoản công</th>
+              <th class="num">Khối lượng</th>
+              <th>ĐVT</th>
+              <th class="num">Đơn giá công</th>
+              <th class="num">Thành tiền</th>
+              <th>Ghi chú / điểm phải chốt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#ecfdf5">
+              <td><b>Công thợ khoán tổng</b></td>
+              <td class="num" id="laborKhoanArea"></td>
+              <td>m²</td>
+              <td class="num" id="laborKhoanRate"></td>
               <td class="num lineTotal" id="laborOnly"></td>
-              <td>Phải ghi rõ có bao gồm xây, trát, ốp lát, sơn, lợp mái, điện nước, chống thấm không.</td>
+              <td>Sửa ở thanh công cụ đầu trang. Bao gồm: đào móng, cốp pha, buộc thép, đổ bê tông tay, xây, trát, lát cơ bản. <b id="laborFormula" style="display:none"></b></td>
             </tr>
-            <tr style="background:#fff7ed">
-              <td><b>🎨 Sơn bả</b><br><span style="color:var(--muted);font-size:12px">Cần chốt riêng</span></td>
-              <td class="num" style="color:var(--muted)">Theo m² hoặc trọn gói</td>
-              <td class="num" style="color:var(--warn);font-weight:700">Chưa tính</td>
-              <td>Tham khảo: <b>25.000–35.000đ/m²</b> (chỉ công, không vật tư). Hỏi rõ: bả mấy lớp, sơn mấy lớp lót/phủ, có bao gồm xử lý nứt chân chim không. Diện tích sơn ~700 m² → ước <b>18–25tr</b>.</td>
-            </tr>
-            <tr style="background:#fff7ed">
-              <td><b>🪨 Ốp đá cầu thang</b><br><span style="color:var(--muted);font-size:12px">Cần chốt riêng</span></td>
-              <td class="num" style="color:var(--muted)">Theo md bậc hoặc m²</td>
-              <td class="num" style="color:var(--warn);font-weight:700">Chưa tính</td>
-              <td>Tham khảo: <b>250.000–400.000đ/md bậc</b> (công ốp, chưa gồm đá). Đá Granite/Marble vật tư riêng ~<b>800k–1,5tr/m²</b>. Hỏi rõ: số bậc, có ốp cổ bậc/mặt bậc không, có ốp chiếu nghỉ và bo nẹp không.</td>
-            </tr>
+            <tr><td>Lắp đặt điện nước</td><td class="num"><input type="number" class="lqty" step="1" value="280" oninput="recalc()"></td><td>m²</td><td class="num"><input type="number" class="lprice" step="1000" value="120000" oninput="recalc()"></td><td class="num lineTotal"></td><td>Chỉ công, chưa gồm vật tư. Hỏi rõ: đi ống âm + kéo dây + lắp đèn/ổ cắm/thiết bị, hay chỉ đi ống. Tham khảo 100–150k/m².</td></tr>
+            <tr><td>Đổ bê tông tươi (thuê bơm)</td><td class="num"><input type="number" class="lqty" step="1" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="lprice" step="100000" value="8000000" oninput="recalc()"></td><td class="num lineTotal"></td><td>Công + thuê bơm cần khi dùng bê tông thương phẩm (phần vật tư bê tông nằm ở tab vật liệu). Tùy số lần đổ và chiều cao bơm.</td></tr>
+            <tr><td>San nền, cán nền</td><td class="num"><input type="number" class="lqty" step="1" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="lprice" step="100000" value="5000000" oninput="recalc()"></td><td class="num lineTotal"></td><td>Khoán theo khối lượng đất/cát san + công cán nền. Phụ thuộc cốt nền chênh bao nhiêu.</td></tr>
+            <tr><td>Sơn bả (công)</td><td class="num"><input type="number" class="lqty" step="1" value="700" oninput="recalc()"></td><td>m²</td><td class="num"><input type="number" class="lprice" step="1000" value="30000" oninput="recalc()"></td><td class="num lineTotal"></td><td>Chỉ công, không vật tư. Tham khảo 25–35k/m². Hỏi: bả mấy lớp, sơn mấy lớp lót/phủ, có xử lý nứt chân chim không.</td></tr>
+            <tr><td>Lợp mái ngói (công)</td><td class="num"><input type="number" class="lqty" step="1" value="160" oninput="recalc()"></td><td>m²</td><td class="num"><input type="number" class="lprice" step="1000" value="80000" oninput="recalc()"></td><td class="num lineTotal"></td><td>Công làm khung kèo + lợp ngói. Tham khảo 60–120k/m² tùy kiểu mái. Hỏi đội thô có nhận mái không.</td></tr>
+            <tr><td>Chống thấm (công)</td><td class="num"><input type="number" class="lqty" step="1" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="lprice" step="100000" value="6000000" oninput="recalc()"></td><td class="num lineTotal"></td><td>WC, ban công, mái/seno, chân tường, hộp kỹ thuật. Hỏi bảo hành mấy năm.</td></tr>
+            <tr><td>Ốp đá cầu thang (công)</td><td class="num"><input type="number" class="lqty" step="1" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="lprice" step="100000" value="10000000" oninput="recalc()"></td><td class="num lineTotal"></td><td>Công ốp, chưa gồm đá (~250–400k/md bậc). Hỏi: số bậc, ốp cổ/mặt bậc, chiếu nghỉ, bo nẹp.</td></tr>
+            <tr><td>Lắp thiết bị vệ sinh, đèn, phụ kiện</td><td class="num"><input type="number" class="lqty" step="1" value="1" oninput="recalc()"></td><td>gói</td><td class="num"><input type="number" class="lprice" step="100000" value="3000000" oninput="recalc()"></td><td class="num lineTotal"></td><td>Lắp bồn cầu, lavabo, sen vòi, đèn, quạt sau khi hoàn thiện.</td></tr>
           </tbody>
+          <tfoot>
+            <tr><td colspan="4">Công khoán tổng</td><td class="num" id="laborKhoanTotal"></td><td></td></tr>
+            <tr><td colspan="4">Tổng công đặc thù (ngoài khoán)</td><td class="num" id="laborExtraTotal"></td><td></td></tr>
+            <tr><td colspan="4">Tổng tiền công</td><td class="num" id="laborGrandTotal"></td><td></td></tr>
+          </tfoot>
         </table>
       </div>
-      <div class="note"><b>⚠️ Không nên chỉ hỏi "1,2tr/m² bao gồm xây và hoàn thiện".</b> Cần bắt đội thợ ghi thành checklist phạm vi công việc. Nếu họ không nhận <b>sơn bả</b>, <b>ốp đá cầu thang</b>, mái, điện nước, chống thấm hoặc lắp thiết bị thì các khoản đó sẽ phát sinh thêm — đây là 2 mục thường bị bỏ sót nhất.</div>
+      <div class="note"><b>⚠️ Tránh tính trùng:</b> giá khoán 1,2tr/m² ở đây được hiểu là <b>chỉ thô + hoàn thiện cơ bản</b>. Nếu khi đàm phán đội thợ nhận luôn điện nước / sơn / mái… thì hãy đặt khối lượng dòng tương ứng = <b>0</b> để không cộng hai lần.</div>
     </div>
   </section>
 
@@ -1117,8 +1132,10 @@ const DEFAULTS = {
   area: 280,
   laborRate: 1200000,
   contRate: 8.0,
-  qty: [30, 160, 460, 120, 120, 90, 55, 1, 95, 60, 48000, 1, 160, 280, 80, 1, 700, 1, 1, 1, 1, 1, 1, 1],
-  ref: [1500000, 45000, 85000, 170000, 235000, 310000, 395000, 26000000, 550000, 600000, 1350, 25000000, 500000, 250000, 300000, 12000000, 90000, 100000000, 55000000, 45000000, 35000000, 40000000, 35000000, 30000000]
+  qty: [35, 750, 1550, 30, 4, 150, 5, 1, 100, 60, 50, 48000, 1, 160, 280, 80, 1, 700, 1, 1, 1, 1, 1, 1, 1],
+  ref: [1500000, 14500, 14500, 170000, 235000, 310000, 395000, 26000000, 550000, 600000, 1200000, 1350, 25000000, 500000, 250000, 300000, 12000000, 90000, 100000000, 55000000, 45000000, 35000000, 40000000, 35000000, 30000000],
+  lqty: [280, 1, 1, 700, 160, 1, 1, 1],
+  lprice: [120000, 8000000, 5000000, 30000, 80000, 6000000, 10000000, 3000000]
 };
 
 function fmt(v) { return Math.round(v).toLocaleString('vi-VN') + ' đ'; }
@@ -1158,7 +1175,21 @@ function recalc() {
   const cont = mat * contRate;
   const area = parseFloat(document.getElementById('area').value) || 0;
   const laborRate = parseFloat(document.getElementById('laborRate').value) || 0;
-  const labor = area * laborRate;
+  const laborKhoan = area * laborRate;
+
+  // Công đặc thù ngoài khoán
+  let extraLabor = 0;
+  document.querySelectorAll('#laborTable tbody tr').forEach(tr => {
+    const qInput = tr.querySelector('.lqty');
+    if (!qInput) return; // bỏ qua dòng khoán tổng (không có input)
+    const qty = parseFloat(qInput.value) || 0;
+    const price = parseFloat(tr.querySelector('.lprice').value) || 0;
+    const total = qty * price;
+    tr.querySelector('.lineTotal').textContent = fmt(total);
+    extraLabor += total;
+  });
+
+  const labor = laborKhoan + extraLabor;
   const grand = mat + cont + labor;
 
   document.getElementById('matSubtotal').textContent = fmt(mat);
@@ -1181,7 +1212,14 @@ function recalc() {
   document.getElementById('workCont').textContent = fmt(cont);
   document.getElementById('workLabor').textContent = fmt(labor);
   document.getElementById('workTotal').textContent = fmt(grand);
-  document.getElementById('laborOnly').textContent = fmt(labor);
+
+  // Bảng tiền công
+  document.getElementById('laborKhoanArea').textContent = area.toLocaleString('vi-VN');
+  document.getElementById('laborKhoanRate').textContent = fmt(laborRate);
+  document.getElementById('laborOnly').textContent = fmt(laborKhoan);
+  document.getElementById('laborKhoanTotal').textContent = fmt(laborKhoan);
+  document.getElementById('laborExtraTotal').textContent = fmt(extraLabor);
+  document.getElementById('laborGrandTotal').textContent = fmt(labor);
   document.getElementById('laborFormula').textContent = area.toLocaleString('vi-VN') + ' m² × ' + fmt(laborRate) + '/m²';
   document.querySelectorAll('[data-work]').forEach(td => td.textContent = fmt(parseFloat(td.dataset.work) || 0));
 
@@ -1322,6 +1360,8 @@ function collectState() {
     qty: [...document.querySelectorAll('#matTable tbody tr')].map(tr => tr.children[2].querySelector('input').value),
     ref: [...document.querySelectorAll('#matTable tbody tr')].map(tr => tr.children[4].querySelector('input').value),
     adj: [...document.querySelectorAll('#matTable tbody tr')].map(tr => tr.children[5].querySelector('input').value),
+    lqty: [...document.querySelectorAll('#laborTable .lqty')].map(i => i.value),
+    lprice: [...document.querySelectorAll('#laborTable .lprice')].map(i => i.value),
     checklist: [...document.querySelectorAll('.checklist-table input[type="checkbox"]')].map(b => b.checked),
     savedAt: new Date().toISOString()
   };
@@ -1338,6 +1378,10 @@ function applyState(s) {
     if (s.ref && s.ref[i] !== undefined) tr.children[4].querySelector('input').value = s.ref[i];
     if (s.adj && s.adj[i] !== undefined) tr.children[5].querySelector('input').value = s.adj[i];
   });
+  const lqty = document.querySelectorAll('#laborTable .lqty');
+  const lprice = document.querySelectorAll('#laborTable .lprice');
+  lqty.forEach((inp, i) => { if (s.lqty && s.lqty[i] !== undefined) inp.value = s.lqty[i]; });
+  lprice.forEach((inp, i) => { if (s.lprice && s.lprice[i] !== undefined) inp.value = s.lprice[i]; });
   const boxes = document.querySelectorAll('.checklist-table input[type="checkbox"]');
   boxes.forEach((b, i) => { if (s.checklist && s.checklist[i] !== undefined) b.checked = s.checklist[i]; });
 }
@@ -1381,6 +1425,114 @@ function exportData() {
   URL.revokeObjectURL(url);
 }
 
+/* ===== XUẤT EXCEL (.xls — SpreadsheetML, nhiều sheet, không cần thư viện) ===== */
+function xmlEsc(s) {
+  return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+function cellText(v) { return '<Cell><Data ss:Type="String">' + xmlEsc(v) + '</Data></Cell>'; }
+function cellNum(v, styleId) {
+  const s = styleId ? ' ss:StyleID="' + styleId + '"' : '';
+  return '<Cell' + s + '><Data ss:Type="Number">' + (v || 0) + '</Data></Cell>';
+}
+function cellHead(v) { return '<Cell ss:StyleID="head"><Data ss:Type="String">' + xmlEsc(v) + '</Data></Cell>'; }
+function row(cells) { return '<Row>' + cells.join('') + '</Row>'; }
+
+function buildExcel() {
+  // --- Sheet 1: Vật liệu ---
+  const matRows = [];
+  matRows.push(row([cellHead('Nhóm'), cellHead('Nguyên vật liệu'), cellHead('Khối lượng'),
+    cellHead('ĐVT'), cellHead('Đơn giá tham khảo'), cellHead('Đơn giá điều chỉnh'),
+    cellHead('Đơn giá áp dụng'), cellHead('Thành tiền'), cellHead('Ghi chú')]));
+  let matTotal = 0;
+  document.querySelectorAll('#matTable tbody tr').forEach(tr => {
+    if (tr.id === 'matNoResult') return;
+    const group = tr.children[0].textContent.trim();
+    const name = tr.children[1].dataset.name || tr.children[1].textContent.trim();
+    const qty = parseFloat(tr.children[2].querySelector('input').value) || 0;
+    const unit = tr.children[3].textContent.trim();
+    const ref = parseFloat(tr.children[4].querySelector('input').value) || 0;
+    const adj = parseFloat(tr.children[5].querySelector('input').value) || 0;
+    const price = adj > 0 ? adj : ref;
+    const total = qty * price;
+    const note = tr.children[7].textContent.trim();
+    matTotal += total;
+    matRows.push(row([cellText(group), cellText(name), cellNum(qty), cellText(unit),
+      cellNum(ref, 'money'), cellNum(adj, 'money'), cellNum(price, 'money'),
+      cellNum(total, 'money'), cellText(note)]));
+  });
+  const contRate = (parseFloat(document.getElementById('contRate').value) || 0) / 100;
+  const cont = matTotal * contRate;
+  matRows.push(row([cellText(''), cellHead('Tổng vật tư trước dự phòng'), cellText(''), cellText(''), cellText(''), cellText(''), cellText(''), cellNum(matTotal, 'moneyBold'), cellText('')]));
+  matRows.push(row([cellText(''), cellHead('Dự phòng vật tư (' + (contRate * 100).toFixed(1) + '%)'), cellText(''), cellText(''), cellText(''), cellText(''), cellText(''), cellNum(cont, 'moneyBold'), cellText('')]));
+
+  // --- Sheet 2: Tiền công ---
+  const laborRows = [];
+  laborRows.push(row([cellHead('Khoản công'), cellHead('Khối lượng'), cellHead('ĐVT'), cellHead('Đơn giá công'), cellHead('Thành tiền'), cellHead('Ghi chú')]));
+  const area = parseFloat(document.getElementById('area').value) || 0;
+  const laborRate = parseFloat(document.getElementById('laborRate').value) || 0;
+  const khoan = area * laborRate;
+  laborRows.push(row([cellText('Công thợ khoán tổng'), cellNum(area), cellText('m²'), cellNum(laborRate, 'money'), cellNum(khoan, 'moneyBold'), cellText('Thô + hoàn thiện cơ bản')]));
+  let extra = 0;
+  document.querySelectorAll('#laborTable tbody tr').forEach(tr => {
+    const qInput = tr.querySelector('.lqty');
+    if (!qInput) return;
+    const name = tr.children[0].textContent.trim();
+    const qty = parseFloat(qInput.value) || 0;
+    const unit = tr.children[2].textContent.trim();
+    const price = parseFloat(tr.querySelector('.lprice').value) || 0;
+    const total = qty * price;
+    const note = tr.children[5].textContent.trim();
+    extra += total;
+    laborRows.push(row([cellText(name), cellNum(qty), cellText(unit), cellNum(price, 'money'), cellNum(total, 'money'), cellText(note)]));
+  });
+  const laborTotal = khoan + extra;
+  laborRows.push(row([cellHead('Công khoán tổng'), cellText(''), cellText(''), cellText(''), cellNum(khoan, 'moneyBold'), cellText('')]));
+  laborRows.push(row([cellHead('Tổng công đặc thù (ngoài khoán)'), cellText(''), cellText(''), cellText(''), cellNum(extra, 'moneyBold'), cellText('')]));
+  laborRows.push(row([cellHead('TỔNG TIỀN CÔNG'), cellText(''), cellText(''), cellText(''), cellNum(laborTotal, 'moneyBold'), cellText('')]));
+
+  // --- Sheet 3: Tổng quan ---
+  const grand = matTotal + cont + laborTotal;
+  const sumRows = [];
+  sumRows.push(row([cellHead('Hạng mục'), cellHead('Thành tiền')]));
+  sumRows.push(row([cellText('Vật tư trước dự phòng'), cellNum(matTotal, 'money')]));
+  sumRows.push(row([cellText('Dự phòng vật tư'), cellNum(cont, 'money')]));
+  sumRows.push(row([cellText('Tiền công (khoán + đặc thù)'), cellNum(laborTotal, 'money')]));
+  sumRows.push(row([cellHead('TỔNG DỰ TOÁN'), cellNum(grand, 'moneyBold')]));
+  sumRows.push(row([cellText('Diện tích tính công (m²)'), cellNum(area)]));
+  sumRows.push(row([cellText('Đơn giá xây / m²'), cellNum(area > 0 ? Math.round(grand / area) : 0, 'money')]));
+
+  function sheet(name, rows, cols) {
+    const colTags = cols.map(w => '<Column ss:Width="' + w + '"/>').join('');
+    return '<Worksheet ss:Name="' + name + '"><Table>' + colTags + rows.join('') + '</Table></Worksheet>';
+  }
+
+  return '<?xml version="1.0" encoding="UTF-8"?>' +
+    '<?mso-application progid="Excel.Sheet"?>' +
+    '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" ' +
+    'xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">' +
+    '<Styles>' +
+    '<Style ss:ID="head"><Font ss:Bold="1"/><Interior ss:Color="#D1FAE5" ss:Pattern="Solid"/></Style>' +
+    '<Style ss:ID="money"><NumberFormat ss:Format="#,##0&quot; đ&quot;"/></Style>' +
+    '<Style ss:ID="moneyBold"><Font ss:Bold="1"/><NumberFormat ss:Format="#,##0&quot; đ&quot;"/></Style>' +
+    '</Styles>' +
+    sheet('Vật liệu', matRows, [90, 220, 80, 50, 120, 120, 110, 120, 320]) +
+    sheet('Tiền công', laborRows, [220, 80, 50, 120, 120, 320]) +
+    sheet('Tổng quan', sumRows, [220, 140]) +
+    '</Workbook>';
+}
+
+function exportExcel() {
+  const xml = buildExcel();
+  const blob = new Blob(['﻿' + xml], { type: 'application/vnd.ms-excel;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = 'du-toan-' + stamp + '.xls';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 function importData(input) {
   const file = input.files && input.files[0];
   if (!file) return;
@@ -1416,6 +1568,8 @@ resetAll = function () {
     tr.children[4].querySelector('input').value = DEFAULTS.ref[i];
     tr.children[5].querySelector('input').value = '';
   });
+  document.querySelectorAll('#laborTable .lqty').forEach((inp, i) => { inp.value = DEFAULTS.lqty[i]; });
+  document.querySelectorAll('#laborTable .lprice').forEach((inp, i) => { inp.value = DEFAULTS.lprice[i]; });
   document.querySelectorAll('.checklist-table input[type="checkbox"]').forEach(b => b.checked = false);
   try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
   recalc();

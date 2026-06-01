@@ -95,6 +95,25 @@ header .header-inner {
   max-width: 1500px;
   margin: 0 auto;
 }
+header .brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+  color: rgba(255,255,255,.85);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+  transition: color var(--transition);
+}
+header .brand-logo:hover { color: white; }
+header .brand-logo .brand-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #2dd4bf;
+  box-shadow: 0 0 0 4px rgba(45,212,191,.25);
+}
 header .badge {
   display: inline-flex;
   align-items: center;
@@ -189,6 +208,36 @@ nav button.print-btn:hover {
   border-color: #d97706;
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(245,158,11,.35);
+}
+nav .home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink-soft);
+  transition: all var(--transition);
+}
+nav .home-link:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+nav .home-link .ar { font-size: 15px; line-height: 1; }
+nav .nav-sep {
+  width: 1px;
+  align-self: stretch;
+  background: var(--line);
+  margin: 2px 4px;
+}
+@media (max-width: 760px) {
+  nav .nav-sep { display: none; }
 }
 
 /* MAIN */
@@ -692,6 +741,80 @@ tbody tr.updated {
   color: var(--danger);
 }
 
+/* MATERIAL SEARCH */
+.mat-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 0 14px;
+}
+.mat-search-ico {
+  position: absolute;
+  left: 14px;
+  font-size: 14px;
+  pointer-events: none;
+  opacity: .55;
+}
+.mat-search input {
+  width: 100%;
+  padding: 11px 84px 11px 40px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  background: white;
+  transition: all var(--transition);
+}
+.mat-search input:hover { border-color: var(--line-strong); }
+.mat-search input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-glow);
+}
+.mat-search-clear {
+  position: absolute;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+.mat-search-clear:hover { background: var(--danger); color: white; }
+.mat-search.has-text .mat-search-clear { display: flex; }
+.mat-search-count {
+  position: absolute;
+  right: 44px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+tbody tr.mat-hidden { display: none; }
+mark.mat-hl {
+  background: #fde68a;
+  color: #92400e;
+  padding: 0 1px;
+  border-radius: 3px;
+}
+.mat-no-result {
+  text-align: center;
+  color: var(--muted);
+  padding: 24px;
+  font-size: 14px;
+}
+
 /* RESPONSIVE */
 @media (max-width: 1100px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
@@ -725,6 +848,7 @@ tbody tr.updated {
 <body>
 <header>
   <div class="header-inner">
+    <a class="brand-logo" href="../"><span class="brand-dot"></span>house</a>
     <div class="badge"><span class="dot"></span>Khái toán xây nhà 2026</div>
     <h1>Dự toán xây nhà — gia chủ tự mua vật tư, tự thuê thợ</h1>
     <p>Bảng tính <b>48.000 viên gạch xây tổng cộng</b> cho toàn nhà, gồm tường bao, tường ngăn, gạch móng và hao hụt. Nhân công không tách thô/hoàn thiện, mà để một dòng khoán công tổng theo m². Sơn bả và ốp đá cầu thang cần chốt riêng với thợ.</p>
@@ -732,6 +856,8 @@ tbody tr.updated {
 </header>
 
 <nav>
+  <a class="home-link" href="../" title="Về trang chủ"><span class="ar">←</span> Trang chủ</a>
+  <span class="nav-sep"></span>
   <button class="active" onclick="show('summary',this)">Tổng quan</button>
   <button onclick="show('bywork',this)">Theo hạng mục</button>
   <button onclick="show('materials',this)">Theo vật liệu</button>
@@ -870,6 +996,12 @@ tbody tr.updated {
     <div class="card">
       <h2>Dự toán theo tổng số lượng nguyên vật liệu</h2>
       <p class="note"><b>💡 Tip:</b> Cả "Đơn giá tham khảo" và "Đơn giá điều chỉnh" đều sửa được. Nếu cột điều chỉnh có giá trị thì ưu tiên dùng, ngược lại dùng giá tham khảo.</p>
+      <div class="mat-search">
+        <span class="mat-search-ico">🔍</span>
+        <input id="matSearch" type="text" placeholder="Tìm vật liệu… (vd: thép, gạch, sơn, điện)" oninput="filterMaterials()" autocomplete="off">
+        <button id="matSearchClear" class="mat-search-clear" onclick="clearMatSearch()" title="Xóa tìm kiếm" aria-label="Xóa tìm kiếm">✕</button>
+        <span id="matSearchCount" class="mat-search-count"></span>
+      </div>
       <div class="table-wrap">
         <table id="matTable">
           <thead>
@@ -1098,6 +1230,86 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 400) btn.classList.add('show');
   else btn.classList.remove('show');
 });
+
+/* ===== TÌM KIẾM VẬT LIỆU ===== */
+function normalize(s) {
+  return (s || '').toString().toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')  // bỏ dấu tiếng Việt
+    .replace(/đ/g, 'd');
+}
+
+function filterMaterials() {
+  const input = document.getElementById('matSearch');
+  const wrap = input.closest('.mat-search');
+  const raw = input.value.trim();
+  const q = normalize(raw);
+  wrap.classList.toggle('has-text', raw.length > 0);
+
+  const rows = document.querySelectorAll('#matTable tbody tr');
+  let shown = 0;
+
+  rows.forEach(tr => {
+    const nameCell = tr.children[1];
+    const groupText = tr.children[0].textContent;
+    const noteText = tr.children[tr.children.length - 1].textContent;
+    const nameText = nameCell.dataset.name || (nameCell.dataset.name = nameCell.textContent);
+
+    const hay = normalize(nameText + ' ' + groupText + ' ' + noteText);
+    const match = q === '' || hay.includes(q);
+
+    tr.classList.toggle('mat-hidden', !match);
+    if (match) shown++;
+
+    // Highlight phần khớp trong cột tên (an toàn, không có input)
+    if (q && match && normalize(nameText).includes(q)) {
+      nameCell.innerHTML = highlight(nameText, raw);
+    } else {
+      nameCell.textContent = nameText;
+    }
+  });
+
+  const count = document.getElementById('matSearchCount');
+  count.textContent = raw ? shown + ' kết quả' : '';
+
+  // Dòng "không có kết quả"
+  const tbody = document.querySelector('#matTable tbody');
+  let empty = document.getElementById('matNoResult');
+  if (raw && shown === 0) {
+    if (!empty) {
+      empty = document.createElement('tr');
+      empty.id = 'matNoResult';
+      empty.innerHTML = '<td colspan="8" class="mat-no-result">Không tìm thấy vật liệu nào khớp "<b></b>".</td>';
+      tbody.appendChild(empty);
+    }
+    empty.querySelector('b').textContent = raw;
+    empty.style.display = '';
+  } else if (empty) {
+    empty.style.display = 'none';
+  }
+}
+
+function highlight(text, raw) {
+  const nq = normalize(raw);
+  const nt = normalize(text);
+  const idx = nt.indexOf(nq);
+  if (idx < 0) return escapeHtml(text);
+  // index trên chuỗi normalize trùng vị trí ký tự với chuỗi gốc (cùng độ dài)
+  const before = text.slice(0, idx);
+  const hit = text.slice(idx, idx + raw.length);
+  const after = text.slice(idx + raw.length);
+  return escapeHtml(before) + '<mark class="mat-hl">' + escapeHtml(hit) + '</mark>' + escapeHtml(after);
+}
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+
+function clearMatSearch() {
+  const input = document.getElementById('matSearch');
+  input.value = '';
+  filterMaterials();
+  input.focus();
+}
 
 /* ===== LƯU / KHÔI PHỤC CACHE TRÌNH DUYỆT ===== */
 const STORAGE_KEY = 'house:dutoan:v1';

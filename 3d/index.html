@@ -32,12 +32,33 @@
   .hint b{color:#cdb27a}
   #fps{position:fixed;bottom:12px;right:14px;z-index:10;font:11px Georgia,serif;
     color:#5f6b82}
+
+  /* --- BRAND BAR (đồng bộ giữa các trang) --- */
+  #brand{position:fixed;top:18px;right:18px;z-index:20;display:flex;align-items:center;gap:10px}
+  #brand .home{display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+    font-family:'Inter',-apple-system,'Segoe UI',sans-serif;font-size:13px;font-weight:600;
+    color:#dfe6f0;background:rgba(20,26,40,.82);backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 14px 8px 11px;
+    box-shadow:0 8px 24px rgba(0,0,0,.4);transition:.18s}
+  #brand .home:hover{border-color:#2dd4bf;color:#fff;background:rgba(15,118,110,.35)}
+  #brand .home .ar{font-size:15px;line-height:1}
+  #brand .logo{display:inline-flex;align-items:center;gap:6px;
+    font-family:'Inter',-apple-system,'Segoe UI',sans-serif;font-size:13px;font-weight:700;
+    letter-spacing:-.01em;color:#9aa3b5;padding-right:2px}
+  #brand .logo .dot{width:7px;height:7px;border-radius:50%;background:#2dd4bf;
+    box-shadow:0 0 0 3px rgba(45,212,191,.22)}
+  @media (max-width:560px){#brand .logo{display:none}}
   #title{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:10;
     font:13px Georgia,serif;letter-spacing:3px;color:#cdb27a;text-transform:uppercase;
     pointer-events:none;text-shadow:0 2px 8px #000}
 </style>
 
 <div id="app"></div>
+
+<div id="brand">
+  <a class="home" href="../" title="Về trang chủ"><span class="ar">←</span> Trang chủ</a>
+  <span class="logo"><span class="dot"></span>house</span>
+</div>
 
 <div id="hud">
   <h1>Biệt Thự 2 Tầng</h1>

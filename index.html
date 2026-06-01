@@ -3,104 +3,227 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>house.luannguyen.work</title>
+<title>Bộ công cụ xây nhà</title>
+<meta name="description" content="Bộ công cụ tính toán và mô phỏng cho dự án xây nhà.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 50%, #fff7ed 100%);
-  --ink: #0f172a;
-  --muted: #64748b;
-  --line: #e2e8f0;
-  --radius: 20px;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --ink: #14181f;
+  --ink-soft: #3a4150;
+  --muted: #6b7384;
+  --line: #e4e7ec;
+  --line-strong: #d2d7e0;
+  --gold: #b8860b;
+  --primary: #0f766e;
+  --shadow-sm: 0 1px 2px rgba(15,23,42,.05), 0 1px 3px rgba(15,23,42,.07);
+  --shadow-md: 0 4px 10px -2px rgba(15,23,42,.08), 0 12px 28px -8px rgba(15,23,42,.12);
+  --ease: cubic-bezier(.22,.61,.36,1);
 }
 * { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #f8fafc;
-  background-image: var(--bg-gradient);
-  background-attachment: fixed;
-  color: var(--ink);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 64px 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
 }
-.wrap { width: 100%; max-width: 760px; }
-header { text-align: center; margin-bottom: 40px; }
-header h1 {
-  font-size: 32px;
+.shell {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: clamp(48px, 9vh, 88px) 24px 64px;
+}
+
+/* ---- HEADER ---- */
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+h1 {
+  font-size: clamp(28px, 5vw, 40px);
   font-weight: 800;
   letter-spacing: -0.02em;
-  margin: 0 0 8px;
-  background: linear-gradient(135deg, #0f766e, #064e3b);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+  margin: 0 0 12px;
 }
-header p { color: var(--muted); margin: 0; font-size: 15px; }
-.cards { display: grid; gap: 16px; }
+.lede {
+  font-size: clamp(15px, 2vw, 16px);
+  color: var(--muted);
+  max-width: 58ch;
+  margin: 0 0 36px;
+}
+
+/* ---- SECTION LABEL ---- */
+.section-label {
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+/* ---- CARDS ---- */
+.grid { display: grid; gap: 16px; }
 a.card {
-  display: flex;
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
   align-items: center;
   gap: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px 24px;
   text-decoration: none;
   color: inherit;
-  background: white;
-  border: 1px solid var(--line);
-  border-left: 5px solid var(--accent, #0f766e);
-  border-radius: var(--radius);
-  padding: 22px 24px;
-  box-shadow: 0 4px 6px -1px rgba(15,23,42,.06), 0 10px 25px -5px rgba(15,23,42,.08);
-  transition: transform 200ms cubic-bezier(.4,0,.2,1), box-shadow 200ms cubic-bezier(.4,0,.2,1);
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
 }
 a.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 20px 40px -8px rgba(15,23,42,.14);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--line-strong);
 }
-.card .ic {
-  font-size: 30px;
+a.card:focus-visible {
+  outline: 2px solid var(--accent, var(--primary));
+  outline-offset: 3px;
+}
+.card .glyph {
   width: 56px; height: 56px;
   flex: none;
-  display: flex; align-items: center; justify-content: center;
-  background: color-mix(in srgb, var(--accent, #0f766e) 12%, white);
+  display: grid;
+  place-items: center;
+  font-size: 26px;
   border-radius: 14px;
+  background: color-mix(in srgb, var(--accent, var(--primary)) 12%, white);
+  color: var(--accent, var(--primary));
 }
 .card .body { min-width: 0; }
-.card .t { font-size: 18px; font-weight: 700; margin: 0 0 4px; }
-.card .d { font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 0; }
-.card .arrow { margin-left: auto; color: var(--muted); font-size: 22px; flex: none; }
-footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 48px; }
+.card .t {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 3px;
+}
+.card .d {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+.card .cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--accent, var(--primary));
+  white-space: nowrap;
+  flex: none;
+}
+.card .cta .arrow {
+  display: inline-grid;
+  place-items: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent, var(--primary)) 12%, white);
+  transition: transform .25s var(--ease);
+}
+a.card:hover .cta .arrow { transform: translateX(3px); }
+.card .cta svg { width: 15px; height: 15px; }
+
+/* ---- FOOTER ---- */
+footer {
+  margin-top: 44px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+footer .meta { display: inline-flex; align-items: center; gap: 8px; }
+footer .meta .dot { width: 6px; height: 6px; border-radius: 50%; background: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,.16); }
+
+@media (max-width: 560px) {
+  a.card { grid-template-columns: 48px 1fr; gap: 14px; padding: 18px; }
+  .card .glyph { width: 48px; height: 48px; font-size: 22px; }
+  .card .cta .label { display: none; }
+  .card .cta { grid-column: 1 / -1; justify-content: flex-end; margin-top: 2px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before { transition: none !important; } }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>house.luannguyen.work</h1>
-      <p>Bộ công cụ xây nhà</p>
-    </header>
-    <div class="cards" id="cards"></div>
-    <footer>Tĩnh hoàn toàn · lưu dữ liệu trên trình duyệt của bạn</footer>
-  </div>
-  <script src="/site.config.js"></script>
+  <main class="shell">
+    <p class="eyebrow">house.luannguyen.work</p>
+    <h1>Bộ công cụ xây nhà</h1>
+    <p class="lede">Chọn một công cụ bên dưới để bắt đầu. Tất cả chạy ngay trên trình duyệt, dữ liệu lưu trên máy bạn.</p>
+
+    <p class="section-label">Công cụ</p>
+    <div class="grid" id="grid"></div>
+
+    <footer>
+      <span class="meta"><span class="dot"></span>Static · không cần đăng nhập</span>
+      <span>© <span id="yr"></span> Luan Nguyen</span>
+    </footer>
+  </main>
+
   <script>
-    const cards = document.getElementById('cards');
-    (window.PAGES || []).forEach(p => {
+    /* ============================================================
+       DANH MỤC CÁC TRANG (PATH)
+       Thêm path mới: tạo thư mục <ten>/index.html rồi thêm 1 dòng
+       vào mảng PAGES dưới đây. Thẻ sẽ tự hiện.
+       ============================================================ */
+    const PAGES = [
+      {
+        path: "dutoan",
+        title: "Dự toán xây nhà",
+        desc: "Bảng tính khái toán vật tư, tiền công, checklist chống phát sinh. Số liệu tự lưu vào trình duyệt.",
+        icon: "🏗️",
+        accent: "#0f766e"
+      },
+      {
+        path: "3d",
+        title: "Mô hình 3D biệt thự",
+        desc: "Mô hình 3D biệt thự 2 tầng, xoay – zoom – xem mặt bằng trực tiếp trên trình duyệt.",
+        icon: "🏛️",
+        accent: "#2f4a8c"
+      }
+      // Thêm path mới ở đây, ví dụ:
+      // { path: "vat-lieu", title: "...", desc: "...", icon: "📦", accent: "#b8860b" }
+    ];
+
+    const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+    const grid = document.getElementById('grid');
+    PAGES.forEach(p => {
       const a = document.createElement('a');
       a.className = 'card';
-      a.href = '/' + p.path;
-      a.style.setProperty('--accent', p.accent || '#0f766e');
+      a.href = p.path + '/';
+      if (p.accent) a.style.setProperty('--accent', p.accent);
+      a.setAttribute('aria-label', 'Mở ' + p.title);
       a.innerHTML =
-        '<div class="ic">' + (p.icon || '📄') + '</div>' +
-        '<div class="body"><p class="t"></p><p class="d"></p></div>' +
-        '<div class="arrow">→</div>';
+        '<span class="glyph">' + (p.icon || '▸') + '</span>' +
+        '<span class="body"><p class="t"></p><p class="d"></p></span>' +
+        '<span class="cta"><span class="label">Mở</span><span class="arrow">' + ARROW + '</span></span>';
       a.querySelector('.t').textContent = p.title;
       a.querySelector('.d').textContent = p.desc || '';
-      cards.appendChild(a);
+      grid.appendChild(a);
     });
+    document.getElementById('yr').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>

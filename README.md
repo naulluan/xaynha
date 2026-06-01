@@ -5,10 +5,9 @@ Static site nhiều trang, host trên **Cloudflare Pages**, mỗi path là một
 ## Cấu trúc
 
 ```
-/                 → index.html        (trang chủ, tự liệt kê các path từ site.config.js)
+/                 → index.html        (trang chủ, danh mục các path nhúng ngay trong file)
 /dutoan           → dutoan/index.html (dự toán xây nhà, lưu số liệu vào trình duyệt)
 /3d               → 3d/index.html     (mô hình 3D)
-site.config.js    → danh mục các path (trang chủ đọc file này)
 _redirects        → alias & chuyển hướng URL cũ
 ```
 
@@ -28,7 +27,7 @@ URL sạch (không `.html`) là nhờ Cloudflare Pages tự phục vụ `index.h
 ## Thêm một path mới (ví dụ `/vat-lieu`)
 
 1. Tạo thư mục và file: `vat-lieu/index.html`.
-2. Thêm một mục vào mảng `PAGES` trong `site.config.js`.
+2. Thêm một mục vào mảng `PAGES` trong `index.html` (script ở cuối file).
 3. `git push`. Trang chủ tự hiện thẻ mới, URL `/vat-lieu` chạy ngay.
 
 Không cần sửa `_redirects` trừ khi muốn alias gõ tắt.

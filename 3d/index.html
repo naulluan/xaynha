@@ -16,7 +16,8 @@
   #hud{position:fixed;top:18px;left:18px;z-index:10;width:268px;
     background:var(--panel);backdrop-filter:blur(8px);
     border:1px solid rgba(184,134,11,.45);border-radius:14px;
-    padding:16px 16px 12px;box-shadow:0 18px 50px rgba(0,0,0,.55)}
+    padding:16px 16px 12px;box-shadow:0 18px 50px rgba(0,0,0,.55);
+    transition:transform .28s cubic-bezier(.22,.61,.36,1),opacity .28s}
   #hud h1{font-size:16px;margin:0 0 2px;letter-spacing:.5px;color:#f6e7c3}
   #hud .sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;
     color:#b8860b;margin-bottom:12px;font-family:Georgia,serif}
@@ -32,6 +33,25 @@
   .hint b{color:#cdb27a}
   #fps{position:fixed;bottom:12px;right:14px;z-index:10;font:11px Georgia,serif;
     color:#5f6b82}
+
+  /* --- Nút ẩn/hiện bảng điều khiển --- */
+  #hudToggle{position:fixed;top:18px;left:18px;z-index:21;display:none;
+    width:46px;height:46px;border-radius:12px;cursor:pointer;
+    align-items:center;justify-content:center;font-size:20px;
+    background:var(--panel);backdrop-filter:blur(8px);color:#f6e7c3;
+    border:1px solid rgba(184,134,11,.45);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+  #hud.collapsed{transform:translateX(-115%);opacity:0;pointer-events:none}
+
+  /* --- Mobile / màn hình hẹp --- */
+  @media (max-width:760px),(pointer:coarse){
+    #hudToggle{display:flex}
+    #hud{top:74px;left:12px;right:12px;width:auto;max-width:340px;
+      max-height:72vh;overflow-y:auto;padding:14px 14px 10px}
+    button{padding:11px 8px;font-size:13px}      /* chạm dễ hơn */
+    #fps{display:none}
+    #brand{top:14px;right:12px}
+    .hint-desktop{display:none}
+  }
 
   /* --- BRAND BAR (đồng bộ giữa các trang) --- */
   #brand{position:fixed;top:18px;right:18px;z-index:20;display:flex;align-items:center;gap:10px}
@@ -55,6 +75,8 @@
 
 <div id="app"></div>
 
+<button id="hudToggle" title="Ẩn/hiện bảng điều khiển" aria-label="Ẩn/hiện bảng điều khiển">☰</button>
+
 <div id="brand">
   <a class="home" href="../" title="Về trang chủ"><span class="ar">←</span> Trang chủ</a>
   <span class="logo"><span class="dot"></span>house</span>
@@ -75,8 +97,9 @@
     <button id="bReset">Góc nhìn</button>
   </div>
   <div class="hint">
-    <b>Kéo trái</b> xoay · <b>Lăn chuột</b> zoom · <b>Kéo phải</b> di chuyển.<br>
-    Tắt <b>Mái</b> + <b>Tường ngoài</b> để xem mặt bằng bên trong.
+    <b>1 ngón</b> xoay · <b>2 ngón</b> chụm để zoom · <b>2 ngón kéo</b> di chuyển.<br>
+    <span class="hint-desktop"><b>Kéo trái</b> xoay · <b>Lăn chuột</b> zoom · <b>Kéo phải</b> di chuyển.<br></span>
+    Tắt <b>Mái</b> + <b>Tường nhà</b> để xem mặt bằng bên trong.
   </div>
 </div>
 
@@ -710,7 +733,10 @@ label('BAN CÔNG',0,F2+0.6,BAYZ+0.8);
    7. CAMERA CONTROLS (tự viết — không cần OrbitControls)
    =========================================================== */
 const target=new THREE.Vector3(0,F1+2,0);
+const RADIUS_MIN=6, RADIUS_MAX=120;            // cho phép lùi xa hơn để thấy tổng thể
+const DEFAULT_VIEW={radius:30, theta:0.9, phi:1.15};
 let radius=30, theta=0.9, phi=1.15, autoSpin=false;
+function clampR(v){ return Math.max(RADIUS_MIN,Math.min(RADIUS_MAX,v)); }
 function applyCam(){
   camera.position.set(
     target.x+radius*Math.sin(phi)*Math.sin(theta),
@@ -718,21 +744,72 @@ function applyCam(){
     target.z+radius*Math.sin(phi)*Math.cos(theta));
   camera.lookAt(target);
 }
+
+// FOV + góc nhìn mặc định thích ứng theo tỉ lệ màn hình.
+// Màn dọc (mobile) hẹp ngang -> FOV rộng hơn + lùi xa hơn để nhà 14m vừa khung.
+function fitView(){
+  const ar=innerWidth/innerHeight;
+  camera.fov = ar<1 ? 60 : 48;                 // portrait: 60°, landscape/desktop: 48°
+  camera.updateProjectionMatrix();
+  DEFAULT_VIEW.radius = ar<0.7 ? 46 : ar<1 ? 38 : 30;  // càng hẹp càng lùi xa
+}
+function resetView(){ radius=DEFAULT_VIEW.radius; theta=DEFAULT_VIEW.theta; phi=DEFAULT_VIEW.phi; target.set(0,F1+2,0); }
+
 const dom=renderer.domElement; let drag=null,px=0,py=0;
 dom.addEventListener('contextmenu',e=>e.preventDefault());
-dom.addEventListener('pointerdown',e=>{drag=e.button;px=e.clientX;py=e.clientY;});
-addEventListener('pointerup',()=>drag=null);
+
+/* --- Chuột (desktop) --- */
+dom.addEventListener('pointerdown',e=>{ if(e.pointerType==='touch')return; drag=e.button;px=e.clientX;py=e.clientY;});
+addEventListener('pointerup',e=>{ if(e.pointerType==='touch')return; drag=null;});
 addEventListener('pointermove',e=>{
-  if(drag===null)return;
+  if(e.pointerType==='touch'||drag===null)return;
   const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;
   if(drag===0){ theta-=dx*0.005; phi=Math.max(0.15,Math.min(1.52,phi-dy*0.005)); }
-  else{ // pan
-    const r=new THREE.Vector3().crossVectors(camera.up,camera.getWorldDirection(new THREE.Vector3())).normalize();
-    target.addScaledVector(r,dx*radius*0.0016);
-    target.y=Math.max(0,target.y+dy*radius*0.0016);
-  }
+  else{ panBy(dx,dy); }
 });
-dom.addEventListener('wheel',e=>{e.preventDefault();radius=Math.max(6,Math.min(80,radius+e.deltaY*0.03));},{passive:false});
+dom.addEventListener('wheel',e=>{e.preventDefault();radius=clampR(radius+e.deltaY*0.03);},{passive:false});
+
+function panBy(dx,dy){
+  const r=new THREE.Vector3().crossVectors(camera.up,camera.getWorldDirection(new THREE.Vector3())).normalize();
+  target.addScaledVector(r,dx*radius*0.0016);
+  target.y=Math.max(0,target.y+dy*radius*0.0016);
+}
+
+/* --- Cảm ứng (mobile): 1 ngón xoay · 2 ngón chụm zoom + kéo pan --- */
+let touches={}, lastDist=0, lastMidX=0, lastMidY=0;
+function tList(e){ return Array.from(e.touches); }
+dom.addEventListener('touchstart',e=>{
+  e.preventDefault();
+  const t=tList(e);
+  if(t.length===1){ px=t[0].clientX; py=t[0].clientY; }
+  else if(t.length===2){
+    lastDist=Math.hypot(t[0].clientX-t[1].clientX, t[0].clientY-t[1].clientY);
+    lastMidX=(t[0].clientX+t[1].clientX)/2; lastMidY=(t[0].clientY+t[1].clientY)/2;
+  }
+},{passive:false});
+dom.addEventListener('touchmove',e=>{
+  e.preventDefault();
+  const t=tList(e);
+  if(t.length===1){
+    const dx=t[0].clientX-px, dy=t[0].clientY-py; px=t[0].clientX; py=t[0].clientY;
+    theta-=dx*0.005; phi=Math.max(0.15,Math.min(1.52,phi-dy*0.005));
+  } else if(t.length===2){
+    const dist=Math.hypot(t[0].clientX-t[1].clientX, t[0].clientY-t[1].clientY);
+    const midX=(t[0].clientX+t[1].clientX)/2, midY=(t[0].clientY+t[1].clientY)/2;
+    if(lastDist>0) radius=clampR(radius*(lastDist/dist));   // chụm/giãn = zoom
+    panBy(midX-lastMidX, midY-lastMidY);                    // hai ngón kéo = di chuyển
+    lastDist=dist; lastMidX=midX; lastMidY=midY;
+  }
+},{passive:false});
+dom.addEventListener('touchend',e=>{
+  if(e.touches.length<2) lastDist=0;
+  if(e.touches.length===1){ px=e.touches[0].clientX; py=e.touches[0].clientY; }
+},{passive:false});
+
+/* --- Nút ẩn/hiện bảng điều khiển --- */
+document.getElementById('hudToggle').onclick=()=>{
+  document.getElementById('hud').classList.toggle('collapsed');
+};
 
 /* ===========================================================
    8. HUD TOGGLES
@@ -745,15 +822,16 @@ tog('bFence',v=>fence.visible=v);
 tog('bLabels',v=>{labels.visible=v;inner.visible=v;});
 tog('bNight',v=>{nightLights.forEach(l=>l.visible=v);
   M.glass.emissiveIntensity=v?1.1:0.15;
-  sun.intensity=v?1.05:1.4; hemi.intensity=v?.55:.8;});
+  sun.intensity=v?1.0:1.12; hemi.intensity=v?.55:.62;
+  renderer.toneMappingExposure=v?1.06:0.96;});
 document.getElementById('bSpin').onclick=function(){autoSpin=!autoSpin;this.classList.toggle('on',autoSpin);};
-document.getElementById('bReset').onclick=()=>{radius=30;theta=0.9;phi=1.15;target.set(0,F1+2,0);};
+document.getElementById('bReset').onclick=()=>{fitView();resetView();};
 
 /* ===========================================================
    9. LOOP
    =========================================================== */
 addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;
-  camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+  fitView();renderer.setSize(innerWidth,innerHeight);});
 let last=performance.now(),frames=0,acc=0;
 function loop(t){
   requestAnimationFrame(loop);
@@ -763,5 +841,5 @@ function loop(t){
   frames++;acc+=t-last;last=t;
   if(acc>500){document.getElementById('fps').textContent=Math.round(1000*frames/acc)+' fps';frames=0;acc=0;}
 }
-applyCam();loop(performance.now());
+fitView();resetView();applyCam();loop(performance.now());
 </script>
